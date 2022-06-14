@@ -1,0 +1,18 @@
+<img id="img" src="test.gif"/>
+<img id="result" src=""/>
+<script>
+img.onload = e => {
+	const worker = new Worker("dotrace.worker.js");
+	worker.onmessage = e => {
+		const svg = e.data;
+		result.src = URL.createObjectURL(new Blob([svg], {type: "image/svg+xml"}));
+	};
+	const canvas = document.createElement("canvas");
+	canvas.width = img.naturalWidth;
+	canvas.height = img.naturalHeight;
+	const ctx = canvas.getContext("2d");
+	ctx.drawImage(img, 0, 0);
+	const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+	worker.postMessage({data: data, w: canvas.width, h: canvas.height}, [data.buffer]);
+};
+</script>

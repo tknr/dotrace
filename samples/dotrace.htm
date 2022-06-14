@@ -1,0 +1,15 @@
+<script src="../dotrace.core.js"></script>
+<img id="img" src="test.gif"/>
+<img id="result" src=""/>
+<script>
+img.onload = e => {
+	const canvas = document.createElement("canvas");
+	canvas.width = img.naturalWidth;
+	canvas.height = img.naturalHeight;
+	const ctx = canvas.getContext("2d");
+	ctx.drawImage(img, 0, 0);
+	const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+	const svg = Dotrace.toSVG(data, canvas.width, canvas.height);
+	result.src = URL.createObjectURL(new Blob([svg], {type: "image/svg+xml"}));
+};
+</script>
