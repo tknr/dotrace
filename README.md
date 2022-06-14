@@ -26,6 +26,8 @@ NOTE:
 dotrace.jsが出力するSVGは基本的な内容です. より高度(複雑)な出力を要する場合は
 得られたSVG文字列を加工する, もしくはtrace/dotToShapeメソッドを用いて自力でSVGを構築します.
 
+```
+
 //Node.jsでの例
 "use strict";
 (async () => {
@@ -82,6 +84,8 @@ importScripts("dotrace.core.js");
 		self.postMessage(Dotrace.toSVG(d.data, d.w, d.h));
 	};
 }
+
+```
 
 [API]
 ○Dotrace.trace(data, w, h)
